@@ -1,0 +1,92 @@
+FakeVsRealDataset(for-original).zip
+FakeVsRealDataset(for-rerec).zip
+
+*.pth
+
+prototyping_dataset
+untitled.ipynb
+
+.ipynb_checkpoints
+
+FakeVsReal_2_FineTunning.ipynb
+
+# 1. Ignore everything in the main dataset folder by default.
+/FakeVsRealDataset(for-rerec)/*
+
+# 2. BUT, do NOT ignore the directory that contains your samples.
+#    This makes Git look inside 'for-rerecorded'.
+!/FakeVsRealDataset(for-rerec)/for-rerecorded/
+
+# 3. Now that Git is looking inside, ignore everything in there.
+/FakeVsRealDataset(for-rerec)/for-rerecorded/*
+
+# 4. BUT, do NOT ignore the next level of folders needed.
+!/FakeVsRealDataset(for-rerec)/for-rerecorded/testing/
+!/FakeVsRealDataset(for-rerec)/for-rerecorded/training/
+!/FakeVsRealDataset(for-rerec)/for-rerecorded/validation/
+
+# 5. Now ignore everything inside those folders.
+/FakeVsRealDataset(for-rerec)/for-rerecorded/testing/*
+/FakeVsRealDataset(for-rerec)/for-rerecorded/training/*
+/FakeVsRealDataset(for-rerec)/for-rerecorded/validation/*
+
+# 6. BUT, do NOT ignore the 'fake' and 'real' sub-folders.
+!/FakeVsRealDataset(for-rerec)/for-rerecorded/testing/fake/
+!/FakeVsRealDataset(for-rerec)/for-rerecorded/testing/real/
+!/FakeVsRealDataset(for-rerec)/for-rerecorded/training/fake/
+!/FakeVsRealDataset(for-rerec)/for-rerecorded/training/real/
+!/FakeVsRealDataset(for-rerec)/for-rerecorded/validation/fake/
+!/FakeVsRealDataset(for-rerec)/for-rerecorded/validation/real/
+
+# 6. BUT, do NOT ignore the 'fake' and 'real' sub-folders.
+/FakeVsRealDataset(for-rerec)/for-rerecorded/testing/fake/*
+/FakeVsRealDataset(for-rerec)/for-rerecorded/testing/real/*
+/FakeVsRealDataset(for-rerec)/for-rerecorded/training/fake/*
+/FakeVsRealDataset(for-rerec)/for-rerecorded/training/real/*
+/FakeVsRealDataset(for-rerec)/for-rerecorded/validation/fake/*
+/FakeVsRealDataset(for-rerec)/for-rerecorded/validation/real/*
+
+# 7. FINALLY, un-ignore the specific sample files you want to keep.
+!/FakeVsRealDataset(for-rerec)/for-rerecorded/testing/fake/recording13014.wav_norm_mono.wav
+!/FakeVsRealDataset(for-rerec)/for-rerecorded/testing/real/recording13532.wav_norm_mono.wav
+!/FakeVsRealDataset(for-rerec)/for-rerecorded/training/fake/recording1.wav_norm_mono.wav
+!/FakeVsRealDataset(for-rerec)/for-rerecorded/training/real/recording6449.wav_norm_mono.wav
+!/FakeVsRealDataset(for-rerec)/for-rerecorded/validation/fake/recording14044.wav_norm_mono.wav
+!/FakeVsRealDataset(for-rerec)/for-rerecorded/validation/real/recording15393.wav_norm_mono.wav
+
+# 1. Ignore everything in the main dataset folder by default.
+/FakeVsRealDataset(for-original)/*
+
+# 4. BUT, do NOT ignore the next level of folders needed.
+!/FakeVsRealDataset(for-original)/testing/
+!/FakeVsRealDataset(for-original)/training/
+!/FakeVsRealDataset(for-original)/validation/
+
+# 5. Now ignore everything inside those folders.
+/FakeVsRealDataset(for-original)/testing/*
+/FakeVsRealDataset(for-original)/training/*
+/FakeVsRealDataset(for-original)/validation/*
+
+# 6. BUT, do NOT ignore the 'fake' and 'real' sub-folders.
+!/FakeVsRealDataset(for-original)/testing/fake/
+!/FakeVsRealDataset(for-original)/testing/real/
+!/FakeVsRealDataset(for-original)/training/fake/
+!/FakeVsRealDataset(for-original)/training/real/
+!/FakeVsRealDataset(for-original)/validation/fake/
+!/FakeVsRealDataset(for-original)/validation/real/
+
+# 6. BUT, do NOT ignore the 'fake' and 'real' sub-folders.
+/FakeVsRealDataset(for-original)/testing/fake/*
+/FakeVsRealDataset(for-original)/testing/real/*
+/FakeVsRealDataset(for-original)/training/fake/*
+/FakeVsRealDataset(for-original)/training/real/*
+/FakeVsRealDataset(for-original)/validation/fake/*
+/FakeVsRealDataset(for-original)/validation/real/*
+
+# 7. FINALLY, un-ignore the specific sample files you want to keep.
+!/FakeVsRealDataset(for-original)/testing/fake/file1.wav
+!/FakeVsRealDataset(for-original)/testing/real/file1.wav
+!/FakeVsRealDataset(for-original)/training/fake/file3.mp3
+!/FakeVsRealDataset(for-original)/training/real/file1.wav
+!/FakeVsRealDataset(for-original)/validation/fake/file1.mp3
+!/FakeVsRealDataset(for-original)/validation/real/file4.wav

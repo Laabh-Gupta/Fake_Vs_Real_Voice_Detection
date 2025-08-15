@@ -1,0 +1,23 @@
+D:.
+├───.ipynb_checkpoints
+├───FakeVsRealDataset(for-original)
+│   ├───testing
+│   │   ├───fake
+│   │   └───real
+│   ├───training
+│   │   ├───fake
+│   │   └───real
+│   └───validation
+│       ├───fake
+│       └───real
+└───FakeVsRealDataset(for-rerec)
+    └───for-rerecorded
+        ├───testing
+        │   ├───fake
+        │   └───real
+        ├───training
+        │   ├───fake
+        │   └───real
+        └───validation
+            ├───fake
+            └───real
