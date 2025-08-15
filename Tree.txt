@@ -10,14 +10,52 @@ D:.
 │   └───validation
 │       ├───fake
 │       └───real
-└───FakeVsRealDataset(for-rerec)
-    └───for-rerecorded
-        ├───testing
-        │   ├───fake
-        │   └───real
-        ├───training
-        │   ├───fake
-        │   └───real
-        └───validation
-            ├───fake
-            └───real
+├───FakeVsRealDataset(for-rerec)
+│   └───for-rerecorded
+│       ├───testing
+│       │   ├───fake
+│       │   └───real
+│       ├───training
+│       │   ├───fake
+│       │   └───real
+│       └───validation
+│           ├───fake
+│           └───real
+└───prototyping_dataset
+    ├───testing
+    │   ├───fake
+    │   └───real
+    ├───training
+    │   ├───fake
+    │   └───real
+    └───validation
+        ├───fake
+        └───real
+
+
+dir:
+
+ Directory of D:\Projects\FakeVsReal
+
+15-08-2025  17:48    <DIR>          .
+14-08-2025  10:50    <DIR>          ..
+15-08-2025  17:48             4,143 .gitignore
+15-08-2025  17:23    <DIR>          .ipynb_checkpoints
+15-08-2025  17:41         7,963,530 baseline_cnn_finetuned.pth
+15-08-2025  14:34         7,963,410 baseline_cnn_model.pth
+15-08-2025  14:34         7,746,810 deeper_cnn_model.pth
+15-08-2025  16:24    <DIR>          FakeVsRealDataset(for-original)
+13-08-2025  19:04     8,284,832,100 FakeVsRealDataset(for-original).zip
+13-08-2025  19:03    <DIR>          FakeVsRealDataset(for-rerec)
+13-08-2025  15:56     1,634,166,495 FakeVsRealDataset(for-rerec).zip
+13-08-2025  19:51           101,504 FakeVsReal_1.ipynb
+15-08-2025  17:03         1,050,631 FakeVsReal_2.ipynb
+15-08-2025  17:47           472,611 FakeVsReal_2_FineTunning.ipynb
+11-08-2025  18:56             1,073 LICENCE
+15-08-2025  17:30    <DIR>          prototyping_dataset
+14-08-2025  11:31             4,523 README.md
+15-08-2025  17:31             2,390 SamplingDataset.ipynb
+15-08-2025  17:48               992 Tree.txt
+15-08-2025  14:34       341,689,850 vit_model.pth
+              14 File(s) 10,286,000,062 bytes
+               6 Dir(s)  137,885,798,400 bytes free

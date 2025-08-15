@@ -4,7 +4,6 @@ FakeVsRealDataset(for-rerec).zip
 *.pth
 
 prototyping_dataset
-untitled.ipynb
 
 .ipynb_checkpoints
 
