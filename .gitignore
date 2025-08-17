@@ -6,6 +6,8 @@ __pycache__
 
 prototyping_dataset
 
+assets/
+
 .ipynb_checkpoints
 
 # 1. Ignore everything in the main dataset folder by default.
