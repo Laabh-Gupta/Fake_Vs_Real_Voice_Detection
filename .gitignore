@@ -7,7 +7,6 @@ prototyping_dataset
 
 .ipynb_checkpoints
 
-
 # 1. Ignore everything in the main dataset folder by default.
 /FakeVsRealDataset(for-rerec)/*
 
