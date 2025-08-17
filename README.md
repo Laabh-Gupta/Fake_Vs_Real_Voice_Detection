@@ -7,7 +7,7 @@ This repository contains a complete deep learning project for detecting AI-gener
 The core of the project is a comparative study between multiple deep learning architectures to determine the most effective approach for audio anti-spoofing.
 
 <!-- It's highly recommended to add a screenshot of your running web app here! -->
-![Web App Screenshot](.assets\image.png)
+![Web App Screenshot](.assets/image.png)
 
 ---
 
