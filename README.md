@@ -1,101 +1,154 @@
-# Fake vs Real Voice Detection
+# Real vs. Fake Voice Detection & Anti-Spoofing System 🎙️
 
-This project uses machine learning to distinguish between genuine human speech and AI-generated or deepfake voice recordings. By analyzing various audio features, the model classifies voice samples as either **real** or **fake**, addressing a critical need in an era of rising synthetic media.
+[![Python](https://img.shields.io/badge/Python-3.10%2B-blue?style=for-the-badge&logo=python)](https://www.python.org/) [![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-orange?style=for-the-badge&logo=pytorch)](https://pytorch.org/) [![FastAPI](https://img.shields.io/badge/FastAPI-0.95%2B-green?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com/) [![React](https://img.shields.io/badge/React-18.0%2B-blue?style=for-the-badge&logo=react)](https://reactjs.org/)
 
-***
+This repository contains a complete deep learning project for detecting AI-generated (spoofed) voices. The system is built on a robust workflow that includes data preprocessing, comparative model training, advanced fine-tuning, and deployment into interactive full-stack web applications.
 
-## 📜 Table of Contents
-* [About the Project](#-about-the-project)
-* [Key Features](#-key-features)
-* [Dataset](#-dataset)
-* [Technologies Used](#-technologies-used)
-* [Getting Started](#-getting-started)
-* [Usage](#-usage)
-* [Model Training](#-model-training)
-* [Contributing](#-contributing)
-* [License](#-license)
+The core of the project is a comparative study between multiple deep learning architectures to determine the most effective approach for audio anti-spoofing.
 
-***
+<!-- It's highly recommended to add a screenshot of your running web app here! -->
+<!-- ![Web App Screenshot](https://i.imgur.com/your-screenshot-url.png) -->
 
-## 📖 About the Project
+---
 
-As AI-generated voice technology becomes more accessible, the potential for misuse in scams, misinformation, and fraudulent activities grows. This project tackles this challenge by building a robust classification system. It extracts key audio features from voice recordings to train a machine learning model capable of identifying the subtle artifacts that differentiate synthetic speech from authentic human speech. The primary model used is a **Random Forest Classifier**, known for its high accuracy and robustness in classification tasks.
+## Features
 
-***
+-   **Comparative Model Analysis:** Systematically trains and evaluates three distinct deep learning architectures:
+    1.  **Baseline CNN:** A simple convolutional neural network to establish a performance baseline.
+    2.  **Deeper CNN:** An enhanced CNN with more layers and batch normalization for improved stability.
+    3.  **Vision Transformer (ViT):** A state-of-the-art, pre-trained model fine-tuned for spectrogram analysis.
+-   **Efficient Two-Stage Training:** Implements a robust workflow to first train models from scratch on a large dataset and then fine-tune them with data augmentation to combat overfitting and improve generalization.
+-   **Interactive Web Applications:** Deploys the trained models using two separate full-stack applications, allowing users to upload audio files and receive real-time predictions.
+-   **High-Performance Backend:** Built with **FastAPI** for an asynchronous, fast, and reliable API.
+-   **Modern Frontend:** A responsive and user-friendly interface built with **React.js**.
 
-## ✨ Key Features
+---
 
-* **Audio Feature Extraction:** Utilizes libraries like Librosa to extract Mel-Frequency Cepstral Coefficients (MFCCs), which are fundamental in audio processing.
-* **Machine Learning Model:** Implements a Random Forest Classifier to accurately categorize voice samples.
-* **Data Visualization:** Includes exploratory data analysis to visualize the distributions of audio features.
-* **Model Evaluation:** Assesses the model's performance using metrics such as accuracy and a confusion matrix.
+## Project Workflow & Notebooks
 
-***
+The project's development is documented across four Jupyter notebooks, each serving a specific purpose in the workflow.
 
-## 📊 Dataset
+1.  **`FakeVsReal_1.ipynb`**: The initial exploratory notebook. This was used for early-stage development, prototyping the basic data loading pipeline, and training a simple CNN on a smaller subset of the data (`for-rerec` dataset) to ensure the core concepts were viable.
 
-The model is trained on the "Fake and real voice detection" dataset available on **Kaggle**. This dataset contains a balanced collection of both authentic and AI-generated voice recordings, making it ideal for training a binary classification model. The audio files are processed to extract features that serve as input for the machine learning algorithm.
+2.  **`SamplingDataset.ipynb`**: A utility notebook created to solve a practical problem. Its purpose is to create a smaller, representative subset of the massive `for-original` dataset. This allows for rapid prototyping and debugging of models without waiting hours for training on the full dataset.
 
-You can find the dataset used for this project [here](https://www.kaggle.com/datasets/joshuadaug/fake-and-real-voice-detection).
+3.  **`FakeVsReal_2.ipynb`**: The main initial training script. This notebook scales up the process by training all three models (Baseline CNN, Deeper CNN, ViT) from scratch on the full, large `for-original` dataset. The trained models from this stage are saved (`..._model.pth`) for the next step.
 
-***
+4.  **`FakeVsReal_2_FineTunning.ipynb`**: The final and most important stage. This notebook loads the initially trained models and fine-tunes them for a few more epochs using advanced techniques like data augmentation and a lower learning rate. This step is crucial for combating overfitting and significantly improving the models' final performance. The final, production-ready models (`..._finetuned.pth`) are saved from this notebook.
 
-## 💻 Technologies Used
+---
 
-* **Python**
-* **Scikit-learn:** For building the classification model.
-* **Pandas:** For data manipulation and management.
-* **NumPy:** For numerical operations.
-* **Librosa:** For audio processing and feature extraction.
-* **Matplotlib & Seaborn:** For data visualization.
-* **Jupyter Notebook:** For project development and documentation.
+## Model Performance
 
-***
+The final test accuracies for the fine-tuned models on the unseen test set are as follows:
 
-## 🚀 Getting Started
+| Model                     | Test Accuracy |
+| ------------------------- | :-----------: |
+| Fine-Tuned Baseline CNN   |    **99.51%** |
+| Fine-Tuned Deeper CNN     |    **99.63%** |
+| Fine-Tuned ViT            |    **99.75%** |
 
-To get a local copy up and running, follow these steps.
+---
 
-1.  **Clone the Repository**
-    ```sh
-    git clone [https://github.com/Laabh-Gupta/Fake_Vs_Real_Voice_Detection.git](https://github.com/Laabh-Gupta/Fake_Vs_Real_Voice_Detection.git)
+## Setup and Installation
+
+Follow these steps to set up the project and run the applications locally.
+
+### 1. Clone the Repository
+
+```bash
+git clone [https://github.com/Laabh-Gupta/Fake_Vs_Real_Voice_Detection.git](https://github.com/Laabh-Gupta/Fake_Vs_Real_Voice_Detection.git)
+cd Fake_Vs_Real_Voice_Detection
+```
+
+### 2. Download the Dataset
+
+This project uses "The Fake or Real Dataset" from Kaggle.
+
+-   **Download Link:** [https://www.kaggle.com/datasets/mohammedabdeldayem/the-fake-or-real-dataset](https://www.kaggle.com/datasets/mohammedabdeldayem/the-fake-or-real-dataset)
+-   Download the `for-original.zip` file.
+-   Unzip it and place the resulting `FakeVsRealDataset(for-original)` folder inside the root of your cloned project directory.
+
+### 3. Set Up the Python Backend Environment
+
+This project uses Conda to manage backend dependencies.
+
+**A. Create the Conda Environment:**
+This command creates a new environment named `fastapi_env` with all the necessary libraries.
+
+```bash
+conda create -n fastapi_env python=3.10
+conda activate fastapi_env
+```
+
+**B. Install Dependencies:**
+Install all required Python packages into your new environment.
+
+```bash
+pip install "fastapi[all]" uvicorn torch torchaudio torchvision python-multipart SoundFile
+```
+*Note: If you have a CUDA-enabled GPU, you may want to install a specific PyTorch version that supports it. Visit the [PyTorch website](https://pytorch.org/get-started/locally/) for the correct command.*
+
+### 4. Set Up the React Frontend Environment
+
+The frontend requires Node.js and npm.
+
+**A. Navigate to a Frontend Directory:**
+Choose one of the frontend applications to set up first.
+
+```bash
+# Example for the main ViT model frontend
+cd "ViT Web App/audio-classifier-frontend"
+```
+
+**B. Install Dependencies:**
+This command installs all the necessary React packages.
+
+```bash
+npm install
+```
+*Repeat this step for the `"Baseline Web App/audio_classifier_app_baseline"` directory as well.*
+
+---
+
+## Running the Web Applications
+
+To run an application, you must start both its backend and frontend servers simultaneously in two separate terminals.
+
+### Example: Running the ViT Model Application
+
+#### Terminal 1: Start the Backend Server
+
+1.  Activate the Conda environment:
+    ```bash
+    conda activate fastapi_env
     ```
-2.  **Navigate to Project Directory**
-    ```sh
-    cd Fake_Vs_Real_Voice_Detection
+2.  Navigate to the backend directory:
+    ```bash
+    cd "ViT Web App/audio_app"
     ```
-3.  **Install Dependencies**
-    It is recommended to create a virtual environment. Install the required libraries using:
-    ```sh
-    pip install scikit-learn pandas numpy librosa matplotlib seaborn jupyterlab
+3.  Start the Uvicorn server:
+    ```bash
+    uvicorn main:app --reload
     ```
+    Your AI backend is now running at `http://127.0.0.1:8000`.
 
-***
+#### Terminal 2: Start the Frontend Server
 
-## Usage
+1.  Navigate to the frontend directory:
+    ```bash
+    cd "ViT Web App/audio-classifier-frontend"
+    ```
+2.  Start the React development server:
+    ```bash
+    npm start
+    ```
+    Your browser will automatically open to `http://localhost:3000`, where you can use the application.
 
-The entire workflow, from data loading and feature extraction to model training and evaluation, is contained within the `Fake_Vs_Real_Voice_Detection.ipynb` Jupyter Notebook.
+*To run the **Baseline CNN** application, simply follow the same steps but use the `"Baseline Web App/audio_app_baseline"` and `"Baseline Web App/audio_classifier_app_baseline"` directories instead.*
 
-***
+---
 
-## 📈 Model Training
+## License
 
-The project uses a **Random Forest Classifier** trained on the extracted audio features. The dataset is split into training and testing sets to ensure the model generalizes well to new, unseen data. The model's performance is evaluated based on its accuracy in classifying voices and is visualized using a confusion matrix to show the rates of true positives, true negatives, false positives, and false negatives.
-
-***
-
-## 🤝 Contributing
-
-Contributions are welcome! If you have suggestions for improving this project, please fork the repository and create a pull request. You can also open an issue with the tag "enhancement".
-
-1.  Fork the Project
-2.  Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3.  Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4.  Push to the Branch (`git push origin feature/AmazingFeature`)
-5.  Open a Pull Request
-
-***
-
-## 📄 License
-
-Distributed under the MIT License. See `LICENSE` for more information.
+This project is licensed under the MIT License. See the `LICENCE` file for details.
