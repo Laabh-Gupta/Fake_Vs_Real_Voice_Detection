@@ -1,5 +1,5 @@
 {
-  "name": "audio-classifier-frontend",
+  "name": "audio_classifier_app_baseline",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
