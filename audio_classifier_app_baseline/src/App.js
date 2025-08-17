@@ -1,23 +1,18 @@
-// In src/App.js
-
 import React, { useState } from 'react';
-import './App.css'; // We'll use this for some basic styling
+import './App.css';
 
 function App() {
-  // State variables to manage the file, prediction, and loading status
   const [selectedFile, setSelectedFile] = useState(null);
   const [prediction, setPrediction] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // This function is called when the user selects a file
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
-    setPrediction(null); // Reset previous prediction
-    setError(null); // Reset previous error
+    setPrediction(null);
+    setError(null);
   };
 
-  // This function is called when the user clicks the "Classify Audio" button
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (!selectedFile) {
@@ -25,27 +20,29 @@ function App() {
       return;
     }
 
-    setIsLoading(true); // Show a loading message
+    setIsLoading(true);
+    setPrediction(null); // Clear previous results
+    setError(null);
+    
     const formData = new FormData();
     formData.append('file', selectedFile);
 
     try {
-      // Send the file to your FastAPI backend
       const response = await fetch('http://127.0.0.1:8000/predict/', {
         method: 'POST',
         body: formData,
       });
 
       if (!response.ok) {
-        throw new Error('Something went wrong with the API call.');
+        throw new Error('Network response was not ok.');
       }
 
       const data = await response.json();
-      setPrediction(data); // Store the prediction result
+      setPrediction(data); // Store the entire response object
     } catch (err) {
       setError(err.message);
     } finally {
-      setIsLoading(false); // Hide the loading message
+      setIsLoading(false);
     }
   };
 
@@ -62,10 +59,20 @@ function App() {
           </button>
         </form>
 
-        {/* Conditionally display the loading message, error, or prediction */}
-        {isLoading && <p>Loading...</p>}
-        {error && <p className="error">Error: {error}</p>}
-        {prediction && (
+        {/* --- THIS IS THE CORRECTED LOGIC --- */}
+        
+        {/* 1. Show a loading message if processing */}
+        {isLoading && <p className="loading">Loading...</p>}
+        
+        {/* 2. Show an error if the local error state is set OR if the API returned an error object */}
+        { (error || (prediction && prediction.error)) && (
+          <div className="error">
+            Error: {error || prediction.error}
+          </div>
+        )}
+        
+        {/* 3. ONLY show the success result if a prediction exists AND it has a 'predicted_class' property */}
+        { prediction && prediction.predicted_class && (
           <div className="result">
             <h2>Prediction Result:</h2>
             <p><strong>Filename:</strong> {prediction.filename}</p>
@@ -75,6 +82,7 @@ function App() {
             <p><strong>Confidence:</strong> {(prediction.confidence * 100).toFixed(2)}%</p>
           </div>
         )}
+
       </header>
     </div>
   );

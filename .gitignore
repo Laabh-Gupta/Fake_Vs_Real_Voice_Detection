@@ -1,5 +1,6 @@
 FakeVsRealDataset(for-original).zip
 FakeVsRealDataset(for-rerec).zip
+__pycache__
 
 *.pth
 

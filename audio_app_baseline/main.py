@@ -9,7 +9,7 @@ import torchaudio.transforms as T
 import torch.nn.functional as F
 from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
-from model import BaselineCNN # <-- IMPORTANT: Importing BaselineCNN
+from model import BaselineCNN
 import io
 
 # --- 1. Initialize FastAPI App and CORS ---
@@ -33,17 +33,19 @@ CLASS_NAMES = ["fake", "real"]
 device = "cpu"
 
 print("--- Loading BaselineCNN model ---")
-model = BaselineCNN() # <-- IMPORTANT: Instantiating BaselineCNN
+model = BaselineCNN()
 model.load_state_dict(torch.load("baseline_cnn_finetuned.pth", map_location=device, weights_only=True))
 model.to(device)
 model.eval()
 print("--- Model loaded successfully ---")
 
 
-# --- 3. Define the Preprocessing Function ---
-# NOTE: This version does NOT have the .resize() step needed for the ViT model
-def preprocess_audio(audio_bytes: bytes):
-    waveform, sample_rate = torchaudio.load(io.BytesIO(audio_bytes))
+# --- 3. Define the Preprocessing Function (UPDATED) ---
+# It now accepts a 'format' argument to give torchaudio a hint.
+def preprocess_audio(audio_bytes: bytes, file_format: str):
+    """Takes raw audio bytes, preprocesses them, and returns a spectrogram tensor."""
+    # Pass the format hint to torchaudio.load
+    waveform, sample_rate = torchaudio.load(io.BytesIO(audio_bytes), format=file_format)
 
     if sample_rate != TARGET_SAMPLE_RATE:
         resampler = T.Resample(orig_freq=sample_rate, new_freq=TARGET_SAMPLE_RATE)
@@ -66,7 +68,7 @@ def preprocess_audio(audio_bytes: bytes):
     return spectrogram
 
 
-# --- 4. Define the API Endpoints ---
+# --- 4. Define the API Endpoints (UPDATED) ---
 @app.get("/")
 def read_root():
     return {"message": "Welcome to the Baseline CNN Voice Anti-Spoofing API. Go to /docs to test."}
@@ -75,8 +77,18 @@ def read_root():
 async def predict(file: UploadFile = File(...)):
     audio_bytes = await file.read()
     
+    # --- THIS IS THE NEW LOGIC ---
+    # Get the file extension from the filename (e.g., "mp3" or "wav")
+    file_extension = file.filename.split(".")[-1].lower()
+    
+    # Check if the format is supported before processing
+    if file_extension not in ["wav", "mp3"]:
+        return {"error": f"Unsupported file format: .{file_extension}. Please upload a WAV or MP3 file."}
+    # --- END NEW LOGIC ---
+
     try:
-        spectrogram = preprocess_audio(audio_bytes)
+        # Pass the extension to the preprocessing function
+        spectrogram = preprocess_audio(audio_bytes, file_format=file_extension)
     except Exception as e:
         return {"error": f"Failed to process audio file: {str(e)}"}
 
