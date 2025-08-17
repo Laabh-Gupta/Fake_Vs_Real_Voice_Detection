@@ -97,8 +97,8 @@ The frontend requires Node.js and npm.
 Choose one of the frontend applications to set up first.
 
 ```bash
-# Example for the main ViT model frontend
-cd "ViT Web App/audio-classifier-frontend"
+# Example for the Baseline CNN frontend
+cd "Baseline Web App/audio_classifier_app_baseline"
 ```
 
 **B. Install Dependencies:**
@@ -107,7 +107,7 @@ This command installs all the necessary React packages.
 ```bash
 npm install
 ```
-*Repeat this step for the `"Baseline Web App/audio_classifier_app_baseline"` directory as well.*
+*Repeat this step for the `"ViT Web App/audio-classifier-frontend"` directory as well.*
 
 ---
 
@@ -115,7 +115,7 @@ npm install
 
 To run an application, you must start both its backend and frontend servers simultaneously in two separate terminals.
 
-### Example: Running the ViT Model Application
+### Example: Running the Baseline CNN Application
 
 #### Terminal 1: Start the Backend Server
 
@@ -125,7 +125,7 @@ To run an application, you must start both its backend and frontend servers simu
     ```
 2.  Navigate to the backend directory:
     ```bash
-    cd "ViT Web App/audio_app"
+    cd "Baseline Web App/audio_app_baseline"
     ```
 3.  Start the Uvicorn server:
     ```bash
@@ -137,7 +137,7 @@ To run an application, you must start both its backend and frontend servers simu
 
 1.  Navigate to the frontend directory:
     ```bash
-    cd "ViT Web App/audio-classifier-frontend"
+    cd "Baseline Web App/audio_classifier_app_baseline"
     ```
 2.  Start the React development server:
     ```bash
@@ -145,7 +145,7 @@ To run an application, you must start both its backend and frontend servers simu
     ```
     Your browser will automatically open to `http://localhost:3000`, where you can use the application.
 
-*To run the **Baseline CNN** application, simply follow the same steps but use the `"Baseline Web App/audio_app_baseline"` and `"Baseline Web App/audio_classifier_app_baseline"` directories instead.*
+***Note on Model Choice:*** *While both applications are fully functional, the **Baseline Model Application** is recommended as it is the most accurate model practically.*
 
 ---
 
