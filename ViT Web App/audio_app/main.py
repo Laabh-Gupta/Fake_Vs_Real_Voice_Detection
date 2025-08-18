@@ -46,7 +46,7 @@ device = "cpu"
 # Load the model at startup to avoid reloading it on every request
 print("--- Loading model ---")
 model = ViTModel() # Create an empty instance of your model architecture
-model.load_state_dict(torch.load("vit_finetuned.pth", map_location=device)) # Load your saved weights
+model.load_state_dict(torch.load("vit_model.pth", map_location=device)) # Load your saved weights
 model.to(device)
 model.eval() # Set the model to evaluation mode (very important!)
 print("--- Model loaded successfully ---")
