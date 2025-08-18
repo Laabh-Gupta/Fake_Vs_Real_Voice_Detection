@@ -1,4 +1,4 @@
-# Real vs. Fake Voice Detection & Anti-Spoofing System 🎙️
+# Voice Anti-Spoofing System 🎙️
 
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue?style=for-the-badge&logo=python)](https://www.python.org/) [![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-orange?style=for-the-badge&logo=pytorch)](https://pytorch.org/) [![FastAPI](https://img.shields.io/badge/FastAPI-0.95%2B-green?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com/) [![React](https://img.shields.io/badge/React-18.0%2B-blue?style=for-the-badge&logo=react)](https://reactjs.org/)
 
